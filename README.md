@@ -38,6 +38,7 @@ cat run.sh.XXXXX.out  # ジョブが終了するとファイルができます�
 ## openacc_basic (C, Fortran)
 * OpenACCの基本、kernels,loop,data指示文の使い方を学びましょう。
 * コンパイラメッセージの見方を学びましょう。
+* 01_originalからスタートして、07_reductionが完成版です。
 ```bash
 cd openacc_basic
 cd 01_original      # OpenACCの無いコード。
@@ -45,9 +46,9 @@ make
 cd 02_kernels       # kernelsのみ挿入したコード。
 make                # Cではコンパイルに失敗します。失敗時のメッセージを見てみましょう。
 cd 03_kernels_copy  # kernelsにcopy指示節を追加したコード。
-make                # Cではコンパイルに失敗します。失敗時のメッセージを比べてみましょう。
+make                # Cではコンパイルに成功しますが、並列化されません。メッセージを見てみましょう。
 cd 04_loop          # loop指示文を追加したコード。
-make                # コンパイルに成功します。メッセージを比べてみましょう。
+make                # 並列化に成功します。メッセージを比べてみましょう。
 pjsub run.sh        # とても遅いです。
 cd 05_data          # data指示文を追加したコード。
 make
@@ -60,6 +61,7 @@ pjsub run.sh
 ```
 
 ## openacc_diffusion (C, Fortran)
+* kernels,loop,data指示文を使って拡散方程式のコードを
 
 ## openacc_fdtd (C)
 

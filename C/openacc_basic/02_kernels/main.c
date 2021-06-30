@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     }
             
     for (unsigned int icnt=0; icnt<nt; icnt++) {
-        calc(nx, ny, &a[0], &a[1], &a[2]);
+        calc(nx, ny, a, b, c);
     }
 
     double sum = 0;
