@@ -12,4 +12,9 @@ Wisteria/BDEC-01 Aquariusノード向けのジョブスクリプトが含まれ�
 * OpenMPI (C/openacc_fdtdでのみ利用) 
 
 
-# Usage
+# Usage for Wisteria/BDEC-01 Aquarius Users
+
+```bash
+module load nvidia ompi-cuda
+```
+
