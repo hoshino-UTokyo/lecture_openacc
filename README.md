@@ -10,13 +10,21 @@ Wisteria/BDEC-01 Aquariusノード向けのジョブスクリプトが含まれ�
 
 * NVIDA HPC SDK： https://developer.nvidia.com/nvidia-hpc-sdk-downloads
 * OpenMPI (C/openacc_fdtdでのみ利用) 
-
+Wisteria/BDEC-01 には予めインストールされています。
 
 # Usage 
 
-Wisteria/BDEC-01 Aquarius ユーザの方はログインの度に以下を実行
+以下は全てWisteria/BDEC-01 Aquariusでの利用方法です。
 
 ```bash
 module load nvidia ompi-cuda
 ```
+
+## openacc_hello (C, Fortran)
+
+## openacc_basic (C, Fortran)
+
+## openacc_diffusion (C, Fortran)
+
+## openacc_fdtd (C)
 
