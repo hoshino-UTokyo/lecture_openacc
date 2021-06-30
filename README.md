@@ -28,9 +28,25 @@ cd C or F            # C, Fortran好きな方を選んでください。
 OpenACCのプログラムを動かしてみましょう。
 ```bash
 cd openacc_hello
+cd 01_hello_acc
+make
+pjsub run.sh
+cat run.sh.XXXXX.out  # ジョブが終了するとファイルができます。XXXXXはジョブ番号。
+
 ```
 
 ## openacc_basic (C, Fortran)
+OpenACCのkernels,loop,data指示文の使い方、コンパイラメッセージの見方を学びましょう。
+```bash
+cd openacc_basic
+cd 01_original    # OpenACCの無いコード
+make
+cd 02_kernels    # kernelsのみ挿入したコード
+make             # Cではコンパイルに失敗します。失敗時のメッセージを見てみましょう
+cd 03_kernels_copy  # kernelsにcopy指示節を追加したコード
+make                # Cではコンパイルに失敗します。失敗時のメッセージを比べてみましょう
+cd 04_loop
+```
 
 ## openacc_diffusion (C, Fortran)
 
