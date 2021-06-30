@@ -17,11 +17,11 @@ Wisteria/BDEC-01 には予めインストールされています。
 以下は全てWisteria/BDEC-01 Aquariusでの利用方法です。
 
 ```bash
-module load nvidia ompi-cuda  #NVIDA HPC SDK, OpenMPIの環境構築
+module load nvidia ompi-cuda   # NVIDA HPC SDK, OpenMPIの環境構築。ログインの度必要です。
 cd /work/グループ名/ユーザ名/  #/home は計算ノードから参照できないので、/work以下で作業しましょう。
 git clone https://github.com/hoshino-UTokyo/lecture_openacc.git
 cd lecture_openacc/
-cd C or F            # C, Fortran好きな方を選んでください。
+cd C or F                      # C, Fortran好きな方を選んでください。
 ```
 
 ## openacc_hello (C, Fortran)
@@ -36,16 +36,27 @@ cat run.sh.XXXXX.out  # ジョブが終了するとファイルができます�
 ```
 
 ## openacc_basic (C, Fortran)
-OpenACCのkernels,loop,data指示文の使い方、コンパイラメッセージの見方を学びましょう。
+* OpenACCの基本、kernels,loop,data指示文の使い方を学びましょう。
+* コンパイラメッセージの見方を学びましょう。
 ```bash
 cd openacc_basic
-cd 01_original    # OpenACCの無いコード
+cd 01_original      # OpenACCの無いコード。
 make
-cd 02_kernels    # kernelsのみ挿入したコード
-make             # Cではコンパイルに失敗します。失敗時のメッセージを見てみましょう
-cd 03_kernels_copy  # kernelsにcopy指示節を追加したコード
-make                # Cではコンパイルに失敗します。失敗時のメッセージを比べてみましょう
-cd 04_loop
+cd 02_kernels       # kernelsのみ挿入したコード。
+make                # Cではコンパイルに失敗します。失敗時のメッセージを見てみましょう。
+cd 03_kernels_copy  # kernelsにcopy指示節を追加したコード。
+make                # Cではコンパイルに失敗します。失敗時のメッセージを比べてみましょう。
+cd 04_loop          # loop指示文を追加したコード。
+make                # コンパイルに成功します。メッセージを比べてみましょう。
+pjsub run.sh        # とても遅いです。
+cd 05_data          # data指示文を追加したコード。
+make
+pjsub run.sh        # だいぶ速くなります。
+cd 06_present       # present指示節を使って見栄えを良くしたコード。動きは変わりません。
+make
+cd 07_reduction     # 総和を行うループをreduction指示節で並列化したコード。
+make
+pjsub run.sh        
 ```
 
 ## openacc_diffusion (C, Fortran)
