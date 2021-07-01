@@ -10,15 +10,11 @@ contains
     real(KIND=4),dimension(:,:),intent(out) :: c
     integer :: i,j
 
-    !$acc kernels copyin(a,b) copy(c)
-    !$acc loop independent
     do j = 1,ny
-       !$acc loop independent
        do i = 1,nx
           c(i,j) = c(i,j) + a(i,j) + b(i,j)
        end do
     end do
-    !$acc end kernels
 
   end subroutine calc
 
@@ -60,36 +56,24 @@ program main
     
   call init_cpu(nx, ny, a)
 
-  !$acc data copyin(a) create(b,c)
-  !$acc kernels copyout(b)
-  !$acc loop independent
   do j = 1,ny
-     !$acc loop independent
      do i = 1,nx
         b(i,j) = b0
      end do
   end do
-  !$acc end kernels
 
-  !$acc kernels copyout(c)
   c(:,:) = 0.0
-  !$acc end kernels
 
   do icnt = 1,nt
      call calc(nx, ny, a, b, c)
   end do
 
   sum = 0
-  !$acc kernels copyin(c)
-  !$acc loop reduction(+:sum)
   do j = 1,ny
-     !$acc loop reduction(+:sum)
      do i = 1,nx
         sum = sum + c(i,j)
      end do
   end do
-  !$acc end kernels
-  !$acc end data
 
   !**** End ****!
     
