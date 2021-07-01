@@ -8,14 +8,13 @@ double get_elapsed_time(const struct timeval *tv0, const struct timeval *tv1);
 
 void calc(unsigned int nx, unsigned int ny, const float *a, const float *b, float *c)
 {
-    const unsigned int n = nx * ny;
     
-#pragma acc kernels copy(a[0:n], b[0:n], c[0:n])
+#pragma acc kernels copy(a[0:nx*ny], b[0:nx*ny], c[0:nx*ny])
     for (unsigned int j=0; j<ny; j++) {
-        for (unsigned int i=0; i<nx; i++) {
-            const int ix = i + j*nx;
+	for (unsigned int i=0; i<nx; i++) {
+	    const int ix = i + j*nx;
 	    c[ix] += a[ix] + b[ix];
-        }
+	}
     }
                 
 }
@@ -40,23 +39,23 @@ int main(int argc, char *argv[])
     
     init_cpu(n, a);
 
-#pragma acc kernels copyout(b[0:n], c[0:n])
-    {
-        for (unsigned int i=0; i<n; i++) {
-            b[i] = b0;
-        }
-        for (unsigned int i=0; i<n; i++) {
-            c[i] = 0.0;
-        }
+#pragma acc kernels copyout(b[0:n])
+    for (unsigned int i=0; i<n; i++) {
+	b[i] = b0;
     }
-            
+#pragma acc kernels copyout(c[0:n])
+    for (unsigned int i=0; i<n; i++) {
+	c[i] = 0.0;
+    }
+
     for (unsigned int icnt=0; icnt<nt; icnt++) {
-        calc(nx, ny, a, b, c);
+	calc(nx, ny, a, b, c);
     }
 
     double sum = 0;
+#pragma acc kernels copyin(c[0:n])
     for (unsigned int i=0; i<n; i++) {
-        sum += c[i];
+	sum += c[i];
     }
 
     /**** End ****/
@@ -77,7 +76,7 @@ int main(int argc, char *argv[])
 void   init_cpu(unsigned int n, float *a)
 {
     for (unsigned int i=0; i<n; i++) {
-        a[i] = 1.0;
+	a[i] = 1.0;
     }
 }
 

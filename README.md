@@ -18,7 +18,7 @@ Wisteria/BDEC-01 には予めインストールされています。
 
 ```bash
 module load nvidia ompi-cuda   # NVIDA HPC SDK, OpenMPIの環境構築。ログインの度必要です。
-cd /work/グループ名/ユーザ名/  #/home は計算ノードから参照できないので、/work以下で作業しましょう。
+cd /work/グループ名/ユーザ名/  　#/home は計算ノードから参照できないので、/work以下で作業しましょう。
 git clone https://github.com/hoshino-UTokyo/lecture_openacc.git
 cd lecture_openacc/
 cd C or F                      # C, Fortran好きな方を選んでください。
