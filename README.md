@@ -1,7 +1,9 @@
 # lecture_openacc
 
-東京大学情報基盤センター お試しアカウント付き講習会「GPUプログラミング入門」  
-で使用しているOpenACC(C, Fortran)のサンプルコードです。  
+東京大学情報基盤センター お試しアカウント付き講習会「GPUプログラミング入門」で使用しているOpenACC(C, Fortran)のサンプルコードです。  
+
+OpenACCの基本である、kernels, loop, data指示文の適用方法が学べます。
+
 Wisteria/BDEC-01 Aquariusノード向けのジョブスクリプトが含まれます。    
 講習会URL： https://www.cc.u-tokyo.ac.jp/events/lectures/
 
@@ -9,8 +11,10 @@ Wisteria/BDEC-01 Aquariusノード向けのジョブスクリプトが含まれ�
 # Requirement
 
 * NVIDA HPC SDK： https://developer.nvidia.com/nvidia-hpc-sdk-downloads
-* OpenMPI (C/openacc_fdtdでのみ利用) 
-Wisteria/BDEC-01 には予めインストールされています。
+
+* OpenMPI (C/openacc_fdtdでのみ利用)        
+
+  Wisteria/BDEC-01 には予めインストールされています。
 
 # Usage 
 
@@ -57,13 +61,40 @@ cd 06_present       # present指示節を使って見栄えを良くしたコー
 make
 ```
 
-次の表はWisteriaでの実行時間(秒です)
-| Attempt | 01   | 02       |  03    | 04    |  05   |  06   |
-| :-----  | :-:  | :-:      |  :-:   | :-:   | :-:   |  :-:  |
-| C       | 12.5 | 実行不能 | >600   | 42.1  | 0.383 | 0.382 |	     
-| Fortran | 12.4 | 25.7     |  25.3  | 25.4  | 0.361 | 0.358 | 
+次の表はWisteriaでの実行時間目安(秒)です。
+|         |  01  |    02    |  03  |  04  |  05   |  06   |
+| :------ | :--: | :------: | :--: | :--: | :---: | :---: |
+| C       | 12.5 | 実行不能 | >600 | 42.1 | 0.383 | 0.382 |
+| Fortran | 12.4 |   25.7   | 25.3 | 25.4 | 0.361 | 0.358 |
+
+## openacc_basic_managed (C, Fortran)
+
+* GPUのUnified memory (managed memory) 機能を利用する場合のOpenACCの実装方法を学びましょう。
+  * -ta=tesla,cc80,**managed** をコンパイラオプションに追加することにより有効になります。
+* Data指示文で行っていたデータ管理をシステム側に任せられるので便利です。
+
+```bash
+cd openacc_basic
+cd 01_original      # OpenACCの無いコード。
+make
+cd 02_kernels       # kernelsのみ挿入したコード。
+make                # Cでもmanagedならコンパイルに成功します。
+cd 03_loop          # loop指示文を追加したコード。
+make                # 並列化に成功します。メッセージを比べてみましょう。
+pjsub run.sh        # とても遅いです。
+```
+
+次の表はWisteriaでの実行時間目安(秒)です。
+
+|         |  01  |  02  |  03  |
+| :------ | :--: | :--: | :--: |
+| C       | 12.5 |      |      |
+| Fortran | 12.4 |      |      |
+
+## 
 
 ## openacc_diffusion (C, Fortran)
+
 * kernels,loop,data指示文を使って拡散方程式のコードを
 
 ## openacc_fdtd (C)
