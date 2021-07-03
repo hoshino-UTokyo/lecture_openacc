@@ -1,9 +1,7 @@
 # lecture_openacc
 
 東京大学情報基盤センター お試しアカウント付き講習会「GPUプログラミング入門」で使用しているOpenACC(C, Fortran)のサンプルコードです。  
-
-OpenACCの基本である、kernels, loop, data指示文の適用方法が学べます。
-
+OpenACCの基本である、kernels, loop, data指示文の適用方法が学べます。  
 Wisteria/BDEC-01 Aquariusノード向けのジョブスクリプトが含まれます。    
 講習会URL： https://www.cc.u-tokyo.ac.jp/events/lectures/
 
@@ -64,7 +62,7 @@ make
 次の表はWisteriaでの実行時間目安(秒)です。
 |         |  01  |    02    |  03  |  04  |  05   |  06   |
 | :------ | :--: | :------: | :--: | :--: | :---: | :---: |
-| C       | 12.5 | 実行不能 | >600 | 42.1 | 0.383 | 0.382 |
+| C       | 12.5 | 実行不能 | >600 | 25.3 | 0.383 | 0.382 |
 | Fortran | 12.4 |   25.7   | 25.3 | 25.4 | 0.361 | 0.358 |
 
 ## openacc_basic_managed (C, Fortran)
