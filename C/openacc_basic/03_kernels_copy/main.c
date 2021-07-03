@@ -9,7 +9,7 @@ double get_elapsed_time(const struct timeval *tv0, const struct timeval *tv1);
 void calc(unsigned int nx, unsigned int ny, const float *a, const float *b, float *c)
 {
     
-#pragma acc kernels copyin(a[0:nx*ny], b[0:nx*ny]) copyout(c[0:nx*ny])
+#pragma acc kernels copyin(a[0:nx*ny], b[0:nx*ny]) copy(c[0:nx*ny])
     for (unsigned int j=0; j<ny; j++) {
 	for (unsigned int i=0; i<nx; i++) {
 	    const int ix = i + j*nx;
