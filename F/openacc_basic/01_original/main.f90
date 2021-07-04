@@ -1,4 +1,4 @@
-module foo
+module calc_mod
   implicit none
   
 contains
@@ -31,11 +31,11 @@ contains
     end do
   end subroutine init_cpu
 
-end module foo
+end module calc_mod
 
 
 program main
-  use foo
+  use calc_mod
   implicit none
 
   integer :: nt = 1000
