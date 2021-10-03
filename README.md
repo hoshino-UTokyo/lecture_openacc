@@ -76,10 +76,10 @@ cd openacc_basic
 cd 01_original      # OpenACCの無いコード。
 make
 cd 02_kernels       # kernelsのみ挿入したコード。
-make                # Cでもmanagedならコンパイルに成功します。
+make                # Cでもmanagedならコンパイルに成功します。ただし並列化はされません。
 cd 03_loop          # loop指示文を追加したコード。
 make                # 並列化に成功します。メッセージを比べてみましょう。
-pjsub run.sh        # とても遅いです。
+pjsub run.sh        
 ```
 
 次の表はWisteriaでの実行時間目安(秒)です。
@@ -94,7 +94,20 @@ pjsub run.sh        # とても遅いです。
 
 ## openacc_diffusion (C, Fortran)
 
-* kernels,loop,data指示文を使って拡散方程式のコードを
+* kernels,loop,data指示文を使って拡散方程式のコードを高速化します。
+
+```bash
+cd openacc_basic
+cd 01_original      # OpenACCの無いコード。OpenACC化してみましょう。
+make
+cd 02_openacc       # OpenACC化された解答コード。
+make                
+cd 03_openacc_nvcompiler_acc_time  # コンパイラの機能により、実行時情報を取る方法。ジョブスクリプトが一行違います。
+make                
+cd 04_openacc_managed              # Unified memory機能を使う場合の実装例
+make                
+pjsub run.sh
+```
 
 ## openacc_fdtd (C)
 
