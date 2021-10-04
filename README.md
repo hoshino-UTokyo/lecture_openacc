@@ -112,3 +112,6 @@ pjsub run.sh
 ## openacc_fdtd (C)
 
 * Cバージョンしかなくてすみませんが、上記の演習でもの足りなかったらチャレンジしてみましょう。
+
+# License
+* This software is released under the MIT License, see LICENSE.txt.

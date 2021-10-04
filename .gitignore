@@ -9,3 +9,4 @@
 run
 *.bmp
 .d00*
+openacc_directives/*
