@@ -7,7 +7,7 @@
 
 
 
-module load nvidia/21.3 intel/2021.2.0
+module load nvidia 
 
 export NVCOMPILER_ACC_TIME=1
 ./run

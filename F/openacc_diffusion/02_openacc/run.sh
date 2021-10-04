@@ -7,6 +7,6 @@
 
 
 
-module load nvidia/21.3 intel/2021.2.0
+module load nvidia 
 
 ./run
